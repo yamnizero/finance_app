@@ -1,5 +1,8 @@
+import 'package:finance_app/data/top.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../widget/chart.dart';
 
 class Statistics extends StatefulWidget {
   const Statistics({Key? key}) : super(key: key);
@@ -111,9 +114,46 @@ class _StatisticsState extends State<Statistics> {
                         )
                       ],
                     ),
+                  ),
+                  const SizedBox(height: 20,),
+                  const Chart(),
+                  const SizedBox(height: 20,),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: const [
+                          Text('Top Spending',style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold
+                          ),),
+                        Icon(Icons.swap_vert,size: 25,color: Colors.grey,)
+                      ],
+                    ),
                   )
                 ],
               ),
+            ),
+            SliverList(delegate: SliverChildBuilderDelegate((context,index){
+              return ListTile(
+                leading: Image.asset('assets/images/${geter_top()[index].image!}',height: 40,),
+                title: Text(
+                  geter_top()[index].name!,
+                  style: const TextStyle(fontSize: 17,fontWeight: FontWeight.w700),
+                ),
+                subtitle: Text(
+                  geter_top()[index].time!,
+                  style: const TextStyle(fontWeight: FontWeight.w700),
+                ),
+                trailing: Text(
+                  geter_top()[index].fee!,
+                  style: const TextStyle(fontSize: 17,color: Colors.red,fontWeight: FontWeight.bold),
+                ),
+              );
+            },
+              childCount: geter_top().length,
+            ),
             ),
           ],
         ),
