@@ -1,3 +1,4 @@
+import 'package:finance_app/data/list_moneyModel.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -7,66 +8,81 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child:CustomScrollView(
-          slivers: [
-            SliverToBoxAdapter(
-              child: SizedBox(
-                  height: 350,
-                  child: _head()),
-            ),
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    Text("Transactions History",
-                        style:  TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 19,
-                  color: Colors.black,
-                ),),
-                    Text("See all",
-                        style:  TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 15,
-                  color: Colors.grey ,
-                ),),
-                  ],
-                ),
+          child: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: SizedBox(height: 350, child: _head()),
+          ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  Text(
+                    "Transactions History",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 19,
+                      color: Colors.black,
+                    ),
+                  ),
+                  Text(
+                    "See all",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 15,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ],
               ),
             ),
-            SliverList(delegate: SliverChildBuilderDelegate((context, index){
-              return ListTile(
-                leading: ClipRRect(
-                  borderRadius: BorderRadius.circular(5),
-                  child: Image.asset('assets/images/Transfer.png',height: 40 ,),
-                ),
-                title: const Text("Transfer",
-                  style:  TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 17,
-                  ),),
-                subtitle: const Text("today",
-                  style:  TextStyle(
-                    fontWeight: FontWeight.w600,
-                  ),),
-                trailing: const Text('\$ 56',
-                  style:  TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 19,
-                    color: Colors.green
-                  ),),
-
-              );
-            },))
-          ],
-        )
-      ),
+          ),
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                return ListTile(
+                  leading: ClipRRect(
+                    borderRadius: BorderRadius.circular(5),
+                    child: Image.asset(
+                      'assets/images/${geter()[index].image!}',
+                      height: 40,
+                    ),
+                  ),
+                  title: Text(
+                    geter()[index].name!,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 17,
+                    ),
+                  ),
+                  subtitle: Text(
+                    geter()[index].time!,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  trailing: Text(
+                    geter()[index].fee!,
+                    style:  TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 19,
+                        color: geter()[index].buy! ? Colors.red : Colors.green
+                    ),
+                  ),
+                );
+              },
+              childCount: geter().length,
+            ),
+          ),
+        ],
+      )),
     );
   }
-  Widget _head(){
-    return  Stack(
+
+  Widget _head() {
+    return Stack(
       children: [
         Column(
           children: [
@@ -128,6 +144,7 @@ class HomeScreen extends StatelessWidget {
             ),
           ],
         ),
+
         ///card
         Positioned(
           top: 140,
@@ -141,8 +158,7 @@ class HomeScreen extends StatelessWidget {
                     color: Color.fromRGBO(47, 125, 121, 0.3),
                     offset: Offset(0, 6),
                     blurRadius: 12,
-                    spreadRadius: 6
-                )
+                    spreadRadius: 6)
               ],
               color: const Color.fromARGB(255, 47, 125, 121),
               borderRadius: BorderRadius.circular(25),
@@ -181,10 +197,10 @@ class HomeScreen extends StatelessWidget {
                     children: const [
                       Text(
                         "\$ 2,957",
-                        style:  TextStyle(
-                          fontWeight: FontWeight.bold, fontSize:25,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25,
                           color: Colors.white,
-
                         ),
                       )
                     ],
@@ -203,17 +219,21 @@ class HomeScreen extends StatelessWidget {
                           CircleAvatar(
                             radius: 13,
                             backgroundColor: Color.fromARGB(255, 85, 145, 141),
-                            child: Icon(Icons.arrow_downward,color: Colors.white,size: 19,),
+                            child: Icon(
+                              Icons.arrow_downward,
+                              color: Colors.white,
+                              size: 19,
+                            ),
                           ),
                           SizedBox(
                             width: 7,
                           ),
                           Text(
                             "Income",
-                            style:  TextStyle(
-                              fontWeight: FontWeight.w500, fontSize:16  ,
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 16,
                               color: Color.fromARGB(255, 216, 216, 216),
-
                             ),
                           )
                         ],
@@ -223,17 +243,21 @@ class HomeScreen extends StatelessWidget {
                           CircleAvatar(
                             radius: 13,
                             backgroundColor: Color.fromARGB(255, 85, 145, 141),
-                            child: Icon(Icons.arrow_upward,color: Colors.white,size: 19,),
+                            child: Icon(
+                              Icons.arrow_upward,
+                              color: Colors.white,
+                              size: 19,
+                            ),
                           ),
                           SizedBox(
                             width: 7,
                           ),
                           Text(
                             "Expenses",
-                            style:  TextStyle(
-                              fontWeight: FontWeight.w500, fontSize:16  ,
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 16,
                               color: Color.fromARGB(255, 216, 216, 216),
-
                             ),
                           )
                         ],
@@ -251,24 +275,23 @@ class HomeScreen extends StatelessWidget {
                     children: const [
                       Text(
                         "\$ 2.856",
-                        style:  TextStyle(
-                          fontWeight: FontWeight.w500, fontSize:17  ,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 17,
                           color: Colors.white,
-
                         ),
                       ),
                       Text(
                         "\$ 480",
-                        style:  TextStyle(
-                          fontWeight: FontWeight.w500, fontSize:17  ,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 17,
                           color: Colors.white,
-
                         ),
                       )
                     ],
                   ),
                 ),
-
               ],
             ),
           ),
