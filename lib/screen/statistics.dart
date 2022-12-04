@@ -1,7 +1,5 @@
 import 'package:finance_app/data/top.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../widget/chart.dart';
 
 class Statistics extends StatefulWidget {
@@ -58,7 +56,7 @@ class _StatisticsState extends State<Statistics> {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   color: selected == index
-                                      ? Color.fromARGB(255, 47, 125, 121)
+                                      ? const Color.fromARGB(255, 47, 125, 121)
                                       : Colors.white,
                                 ),
                                 alignment: Alignment.center,
@@ -135,7 +133,8 @@ class _StatisticsState extends State<Statistics> {
                 ],
               ),
             ),
-            SliverList(delegate: SliverChildBuilderDelegate((context,index){
+            SliverList(
+              delegate: SliverChildBuilderDelegate((context,index){
               return ListTile(
                 leading: Image.asset('assets/images/${geter_top()[index].image!}',height: 40,),
                 title: Text(

@@ -1,11 +1,11 @@
 import 'package:finance_app/data/moneyModel.dart';
 List<MoneyModel> geter_top(){
-  MoneyModel snap_food = MoneyModel();
-  snap_food.name = 'macdonald';
-  snap_food.fee = '-\$ 100';
-  snap_food.time = 'jan 30,2022';
-  snap_food.image = 'macdonald.png';
-  snap_food.buy = true;
+  MoneyModel snapFood = MoneyModel();
+  snapFood.name = 'macdonald';
+  snapFood.fee = '-\$ 100';
+  snapFood.time = 'jan 30,2022';
+  snapFood.image = 'macdonald.png';
+  snapFood.buy = true;
 
   MoneyModel snap = MoneyModel();
   snap.name = 'Transfer';
@@ -15,5 +15,5 @@ List<MoneyModel> geter_top(){
   snap.buy = true;
 
 
-  return [snap_food,snap] ;
+  return [snapFood,snap] ;
 }
